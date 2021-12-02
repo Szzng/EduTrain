@@ -1,0 +1,31 @@
+{% extends 'base/base.html'%}
+{% block title %}{{category.name}}{% endblock title %}
+
+{% block content %}
+
+<div class="all_courses_by_category">
+        <h3 class="text-center"> # {{category.name}}</h3>
+        <div class="album py-5 bg-light">
+        <div class="container">
+        <div class="row row-cols-3 row-cols-sm-4 row-cols-md-5 g-2">
+            {% for course in category.course_set.all %}
+            {% load static %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <input class="card-img-top" onclick="window.open('{% url 'course:detail' course.id %}')" type="image" src="{% get_static_prefix %}img/{{course.site}}/{{course.img_idx}}.jpg">
+                    <div class="card-body">
+                        <p class="lead text-muted">{{course.title}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{course.credit}}</small>
+                            <small class="text-muted" >{{course.price}}원</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+        </div>
+</div>
+
+{% endblock content %}

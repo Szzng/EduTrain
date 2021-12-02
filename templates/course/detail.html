@@ -1,0 +1,87 @@
+{% extends 'base/base.html'%}
+{% block title %}{{object.title}}{% endblock title %}
+
+{% block content %}
+
+<div class="course_detail">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5  rounded-3">
+            {% load static %}
+            <img src="{% get_static_prefix %}img/{{object.site}}/{{object.img_idx}}.jpg" width="600" height="400">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+          <div class="h-100 p-5 rounded-3">
+            <p class="lead text-muted"># {{object.category.name}}</p>
+            <h1>{{object.title}}</h1><br/><br/>
+            <p class="lead text-muted text-end">{{object.credit}}</p>
+            <p class="lead text-muted text-end">{{object.price}}원</p>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <a href="{{object.link}}" target="_blank" class="btn btn-outline-primary my-2">해당 연수 사이트로 이동</a>
+                  <a href="{% url 'course:index' %}" class="btn btn-outline-success my-2">다른 연수 둘러보기</a>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-6">
+          <div class="h-100 p-5 rounded-3">
+              <p>{{object.summary}}</p>
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="h-100 p-5 rounded-3">
+              <p>{{object.contents}}</p>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="read_review">
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="list-group">
+            {% for review in object.coursereview_set.all %}
+            <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <h5 class="mb-0">{{review.rate}}</h5>
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <h6 class="mb-0">{{review.comment}}</h6>
+                <small class="opacity-50 text-nowrap">now</small>
+            </div>
+            </a>
+            {% empty %}
+            <h5 class="mb-0">등록된 리뷰가 없습니다.</h5>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="create_review">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row align-items-md-stretch">
+          <div class="col-md-3">
+            <div class="h-100 p-5  rounded-3">
+                {% include 'course/star.html' %}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+              <div class="h-100 p-5 rounded-3">
+              <div class="input-group">
+                  {{form}}
+                  <button  class="btn btn-outline-primary" type="submit">등록</button>
+                </div>
+              </div>
+          </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}
+
+

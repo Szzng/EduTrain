@@ -1,0 +1,8 @@
+{{user.email}}<br/>
+{{user.nickname}}<br/>
+{{user.date_joined}}<br/>
+{% for i in user.interest.all %}
+    {{i.name}}<br/>
+{% endfor %}
+
+<a href="{% url 'register:update' %}">개인 정보 수정하기</a>

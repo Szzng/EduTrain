@@ -1,0 +1,58 @@
+{% extends 'base/base.html'%}
+{% block title %}INDEX{% endblock title %}
+
+{% block content %}
+  <section class="py-5 text-center container">
+      <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="search">
+          {% include 'course/search.html' %}
+              <br/>
+              <div clas="category_tag">
+                {% for category in categories %}
+                  <button type="button" onclick="location.href='{% url 'course:bycategory' category.name %}'" class="btn btn-outline-warning btn-sm"># {{category.name}} </button>
+                {% endfor %}
+              </div>
+              <br/>
+                {% if searched %}
+                    {% for s in searched %}
+                    {% load static %}
+                    <input onclick="window.open('{% url 'course:detail' s.id %}')" type="image" src="{% get_static_prefix %}img/{{s.site}}/{{s.img_idx}}.jpg" width="150" height="150">
+                    {% endfor %}
+                {% endif %}
+                {% if not_found %} {{not_found}} {% endif %}
+            </div>
+      </div>
+  </section>
+
+
+
+<div class="all_courses">
+        {% for category in categories %}
+            <h3 class="text-center"> # {{category.name}}</h3>
+            <div class="album py-5 bg-light">
+            <div class="container">
+            <div class="row row-cols-3 row-cols-sm-4 row-cols-md-5 g-2">
+                {% for course in category.course_set.all %}
+                {% load static %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <input class="card-img-top" onclick="window.open('{% url 'course:detail' course.id %}')" type="image" src="{% get_static_prefix %}img/{{course.site}}/{{course.img_idx}}.jpg">
+                        <div class="card-body">
+                            <p class="lead text-muted">{{course.title}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">{{course.credit}}</small>
+                                <small class="text-muted" >{{course.price}}원</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+            </div>
+            <br/><br/>
+        {% endfor %}
+</div>
+
+
+{% endblock content %}

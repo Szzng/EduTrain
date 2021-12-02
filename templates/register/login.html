@@ -1,0 +1,59 @@
+{% extends 'base/base.html'%}
+{% block title %}{{object.title}}{% endblock title %}
+
+{% block content %}
+<style>
+      .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+
+    .form-signin .checkbox {
+      font-weight: 400;
+    }
+
+    .form-signin .form-floating:focus-within {
+      z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+}
+</style>
+<br/><br/><br/>
+    {% if user.is_authenticated %}
+        {% include 'register/mypage.html' %}
+        <a href="{% url 'register:logout' %}">로그아웃</a>
+<body class="text-center">
+    {% else %}
+        <main class="form-signin">
+            <form method="POST">
+                {% csrf_token %}
+                <h1 class="h3 mb-3 fw-normal">로그인</h1>
+                <div class="form-floating">
+                    {{form.as_p}}
+                </div>
+
+                <div class="checkbox mb-3">
+                  <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+            </form>
+        </main>
+    {% endif %}
+</body>
+
+{% endblock content %}
+
