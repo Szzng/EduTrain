@@ -1,35 +1,13 @@
 {% extends 'base/base.html'%}
 {% block title %}{{object.title}}{% endblock title %}
 
+{% block stylesheets %}
+    {{ block.super }}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock stylesheets %}
+
 {% block content %}
-<style>
-      .form-signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
-
-    .form-signin .checkbox {
-      font-weight: 400;
-    }
-
-    .form-signin .form-floating:focus-within {
-      z-index: 2;
-    }
-
-    .form-signin input[type="email"] {
-      margin-bottom: -1px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    .form-signin input[type="password"] {
-      margin-bottom: 10px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-}
-</style>
 <br/><br/><br/>
     {% if user.is_authenticated %}
         {% include 'register/mypage.html' %}

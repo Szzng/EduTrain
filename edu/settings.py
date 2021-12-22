@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'register.apps.RegisterConfig',
     'course.apps.CourseConfig',
 ]
@@ -60,6 +61,7 @@ TEMPLATES = [
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
+            'string_if_invalid': 'INVALID EXPRESSION: %s',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

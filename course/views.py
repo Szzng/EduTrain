@@ -10,7 +10,6 @@ from django.db.models import Q
 class TestView(TemplateView):
     template_name = 'course/dd.html'
 
-
 class SearchMixin:
     def get_queryset(self):
         queryset = super().get_queryset()

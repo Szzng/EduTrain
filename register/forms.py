@@ -18,7 +18,6 @@ class RegisterForm(forms.ModelForm):
     )
 
 
-
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
@@ -36,7 +35,6 @@ class RegisterForm(forms.ModelForm):
             user.interest.clear()
             user.interest.add(*self.cleaned_data['interest'])
             self.save_m2m()
-
         return user
 
 
